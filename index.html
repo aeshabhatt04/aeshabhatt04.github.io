@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aesha Bhatt — Data Analyst &amp; BI Developer</title>
+<meta name="description" content="Portfolio of Aesha Bhatt, Data Analyst and BI Developer specializing in SQL, Power BI, Tableau, and Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F5F6F1;
+    --paper-raised: #FFFFFF;
+    --ink: #15191C;
+    --ink-soft: #4A5049;
+    --muted: #7A8177;
+    --line: #D9DCD2;
+    --line-strong: #B9C0B4;
+    --accent: #FFC93C;
+    --accent-ink: #4A3A00;
+    --deep: #1C4B43;
+    --deep-soft: #2A6358;
+    --radius: 3px;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+  }
+
+  a { color: var(--deep); }
+
+  img { max-width: 100%; display: block; }
+
+  .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(245, 246, 241, 0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--muted); }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -3px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-resume {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .nav-resume:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 88px 0 64px;
+  }
+  .query-bar {
+    font-family: var(--font-mono);
+    font-size: clamp(0.78rem, 1.6vw, 1rem);
+    background: var(--paper-raised);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    color: var(--ink-soft);
+    box-shadow: 0 1px 0 var(--line-strong);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .query-bar .prompt { color: var(--muted); }
+  .query-bar .kw { color: var(--deep-soft); font-weight: 600; }
+  .query-bar .str { color: #8a5a00; }
+  .query-bar .cursor {
+    display: inline-block;
+    width: 8px; height: 1.1em;
+    background: var(--ink);
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .result-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 14px;
+    letter-spacing: 0.02em;
+  }
+  .result-row .dot { color: var(--deep-soft); }
+
+  .hero-result {
+    margin-top: 28px;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .hero-result.show {
+    animation: rise 0.6s ease forwards;
+  }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+  .hero-name .hl {
+    background: linear-gradient(transparent 62%, var(--accent) 62%);
+  }
+  .hero-role {
+    font-family: var(--font-mono);
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color: var(--deep-soft);
+    margin-top: 10px;
+  }
+  .hero-desc {
+    max-width: 560px;
+    margin-top: 18px;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .hero-meta a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px dotted var(--line-strong); }
+  .hero-meta a:hover { color: var(--deep); border-color: var(--deep); }
+
+  .hero-cta {
+    margin-top: 30px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-decoration: none;
+    padding: 11px 20px;
+    border-radius: var(--radius);
+    display: inline-block;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary { background: var(--deep); color: var(--paper); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 3px 0 var(--ink); }
+  .btn-ghost { border: 1px solid var(--line-strong); color: var(--ink); }
+  .btn-ghost:hover { transform: translateY(-1px); border-color: var(--ink); }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .sec-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    padding: 3px 8px;
+    border-radius: var(--radius);
+  }
+  .sec-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.show { opacity: 1; transform: translateY(0); }
+
+  /* ---------- ABOUT ---------- */
+  .about-text { max-width: 680px; color: var(--ink-soft); font-size: 1.02rem; }
+  .about-text strong { color: var(--ink); }
+
+  /* ---------- EXPERIENCE ---------- */
+  .job {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .job:first-of-type { border-top: none; }
+  .job-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+  .job-role { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
+  .job-org { font-family: var(--font-mono); font-size: 0.85rem; color: var(--deep-soft); margin-top: 2px; }
+  .job ul { margin: 12px 0 0 18px; color: var(--ink-soft); }
+  .job li { margin-bottom: 6px; }
+
+  @media (max-width: 600px) {
+    .job { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+    padding: 22px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .proj-row:hover { border-color: var(--deep-soft); transform: translateX(3px); }
+  .proj-title { font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; }
+  .proj-desc { color: var(--ink-soft); font-size: 0.95rem; margin-top: 6px; max-width: 560px; }
+  .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--deep-soft);
+    background: #EAF1EE;
+    border: 1px solid #D2E3DB;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .proj-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    white-space: nowrap;
+  }
+  .proj-link:hover { color: var(--deep); border-color: var(--deep); }
+
+  .proj-row.placeholder {
+    border-style: dashed;
+    border-color: var(--line-strong);
+    background: transparent;
+  }
+  .proj-row.placeholder .proj-title { color: var(--muted); }
+  .proj-row.placeholder .proj-desc { color: var(--muted); font-family: var(--font-mono); font-size: 0.82rem; }
+
+  @media (max-width: 560px) {
+    .proj-row { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- SKILLS (schema style) ---------- */
+  .schema { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--paper-raised); }
+  .schema-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-top: 1px solid var(--line);
+  }
+  .schema-row:first-child { border-top: none; }
+  .schema-key {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--deep-soft);
+    padding: 14px 18px;
+    background: #FAFAF7;
+    border-right: 1px solid var(--line);
+  }
+  .schema-val {
+    padding: 14px 18px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 600px) {
+    .schema-row { grid-template-columns: 1fr; }
+    .schema-key { border-right: none; border-bottom: 1px solid var(--line); }
+  }
+
+  /* ---------- CERTS + EDUCATION ---------- */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  .cert-item, .edu-item { padding: 14px 0; border-top: 1px dashed var(--line); }
+  .cert-item:first-child, .edu-item:first-child { border-top: none; }
+  .cert-name, .edu-name { font-weight: 600; font-size: 0.95rem; }
+  .edu-detail { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 48px 0 32px;
+  }
+  .contact-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    letter-spacing: -0.01em;
+  }
+  .contact-links {
+    margin-top: 18px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+  }
+  .contact-links a { text-decoration: none; color: var(--ink-soft); border-bottom: 1px dotted var(--line-strong); }
+  .contact-links a:hover { color: var(--deep); border-color: var(--deep); }
+  .foot-note {
+    margin-top: 36px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">aesha<span>.bhatt</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" style="border-top:none; padding-bottom:0;">
+    <div class="query-bar" id="queryBar"></div>
+    <div class="result-row"><span class="dot">●</span> 1 row returned</div>
+
+    <div class="hero-result" id="heroResult">
+      <h1 class="hero-name">Aesha <span class="hl">Bhatt</span></h1>
+      <div class="hero-role">Data Analyst · BI Developer · Database Developer</div>
+      <p class="hero-desc">
+        I turn messy CRM and ERP data into dashboards and reports people actually trust —
+        with SQL, Power BI, Tableau, and Python underneath.
+      </p>
+      <div class="hero-meta">
+        <span>📍 Bengaluru · Pune · Hyderabad · Mumbai · Remote</span>
+        <a href="mailto:aeshabhatt48@gmail.com">aeshabhatt48@gmail.com</a>
+        <a href="tel:+918000015890">+91 8000015890</a>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">01</span>
+      <h2 class="sec-title">Summary</h2>
+    </div>
+    <p class="about-text">
+      Data Analyst and BI Developer with <strong>1+ year of experience</strong> delivering SQL-based
+      reporting, ETL pipelines, and BI dashboards across CRM and ERP environments. Proficient in
+      <strong>Power BI</strong>, <strong>Tableau</strong>, <strong>SQL Server</strong>, and <strong>Python</strong>.
+      Currently based between India and Canada, open to relocating immediately for the right role.
+    </p>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">02</span>
+      <h2 class="sec-title">Experience</h2>
+    </div>
+
+    <div class="job">
+      <div class="job-date">Jun 2023 –<br>Dec 2023</div>
+      <div>
+        <div class="job-role">Data Analyst Intern</div>
+        <div class="job-org">Unisystech Consulting</div>
+        <ul>
+          <li>Built Power BI and Tableau dashboards to track business performance metrics for internal stakeholder reporting.</li>
+          <li>Used SQL and Python (Pandas) to extract, clean, and validate CRM datasets, identifying and resolving data inconsistencies.</li>
+          <li>Worked with stakeholders to gather reporting requirements and deliver analytical outputs aligned with business needs.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-date">May 2021 –<br>Aug 2022</div>
+      <div>
+        <div class="job-role">Analytics &amp; Database Developer</div>
+        <div class="job-org">1Rivet India LLP</div>
+        <ul>
+          <li>Designed and maintained SQL queries using joins, CTEs, and subqueries to extract and transform business data for reporting across multiple departments.</li>
+          <li>Developed Power BI and Tableau dashboards to track sales KPIs, operational metrics, and financial trends used in regular business reviews.</li>
+          <li>Performed data cleansing, profiling, and validation on CRM and ERP datasets to ensure accuracy and consistency in downstream reporting.</li>
+          <li>Worked with SQL Server stored procedures, views, and indexes to support analytics and operational data requirements.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">03</span>
+      <h2 class="sec-title">Projects</h2>
+    </div>
+
+    <!--
+      ============================================================
+      HOW TO ADD YOUR OWN PROJECT:
+      Copy one <div class="proj-row"> ... </div> block below and edit:
+        - .proj-title      -> project name
+        - .proj-desc       -> 1-2 sentence description
+        - .tag spans       -> tech stack, one <span class="tag">X</span> per item
+        - .proj-link href  -> link to GitHub repo, live dashboard, or case study
+      Delete the "placeholder" block once you've added a real one.
+      ============================================================
+    -->
+
+    <div class="proj-row">
+      <div>
+        <div class="proj-title">MARCS Workspace</div>
+        <p class="proj-desc">A flight recommendation system using Python data pipelines and SQL Server — processes user preferences, travel history, and budget inputs to return personalized results.</p>
+        <div class="proj-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL Server</span>
+        </div>
+      </div>
+      <a class="proj-link" href="https://github.com/aeshabhatt04" target="_blank" rel="noopener">View →</a>
+    </div>
+
+    <div class="proj-row">
+      <div>
+        <div class="proj-title">LinkedIn Job Posting Analysis</div>
+        <p class="proj-desc">Analysed 33,000+ job postings using Python (Pandas) to surface hiring trends, remote work patterns, salary distributions, and in-demand technical skills.</p>
+        <div class="proj-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Jupyter Notebook</span>
+        </div>
+      </div>
+      <a class="proj-link" href="https://github.com/aeshabhatt04" target="_blank" rel="noopener">View →</a>
+    </div>
+
+    <div class="proj-row">
+      <div>
+        <div class="proj-title">Canadian Disaster Overview</div>
+        <p class="proj-desc">Designed a PostgreSQL database from raw government disaster datasets and built Tableau dashboards for non-technical stakeholders.</p>
+        <div class="proj-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Tableau</span>
+        </div>
+      </div>
+      <a class="proj-link" href="https://github.com/aeshabhatt04" target="_blank" rel="noopener">View →</a>
+    </div>
+
+    <div class="proj-row placeholder">
+      <div>
+        <div class="proj-title">+ Add your next project here</div>
+        <p class="proj-desc">&lt;-- copy a .proj-row block above this one and fill in your details --&gt;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">04</span>
+      <h2 class="sec-title">Skills</h2>
+    </div>
+    <div class="schema">
+      <div class="schema-row">
+        <div class="schema-key">programming</div>
+        <div class="schema-val">SQL, Python (Pandas, NumPy), R, PySpark</div>
+      </div>
+      <div class="schema-row">
+        <div class="schema-key">databases_cloud</div>
+        <div class="schema-val">SQL Server, PostgreSQL, MySQL, Oracle, Redshift, AWS (S3, Glue, Kinesis, Lambda)</div>
+      </div>
+      <div class="schema-row">
+        <div class="schema-key">bi_analytics</div>
+        <div class="schema-val">Power BI (DAX, Power Query), Tableau, AWS QuickSight, Excel, KPI Reporting, Dashboard Development</div>
+      </div>
+      <div class="schema-row">
+        <div class="schema-key">tools</div>
+        <div class="schema-val">Jupyter Notebook, Git, Databricks</div>
+      </div>
+      <div class="schema-row">
+        <div class="schema-key">languages</div>
+        <div class="schema-val">English (Fluent), Gujarati (Native), Hindi (Fluent)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CERTS + EDUCATION ============ -->
+  <section id="credentials" class="reveal">
+    <div class="sec-head">
+      <span class="sec-tag">05</span>
+      <h2 class="sec-title">Certifications &amp; Education</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="cert-item">
+          <div class="cert-name">AWS Certified Data Engineer – Associate</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-name">AWS Certified Cloud Practitioner</div>
+        </div>
+      </div>
+      <div>
+        <div class="edu-item">
+          <div class="edu-name">Conestoga College, Canada</div>
+          <div class="edu-detail">PG Diploma, Business Analytics · 2023–2024</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-name">Conestoga College, Canada</div>
+          <div class="edu-detail">PG Diploma, Big Data Solution Architecture · 2022–2023</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-name">Uka Tarsadia University, India</div>
+          <div class="edu-detail">BSc, Information Technology · 2018–2021</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-title">Let's talk data.</div>
+    <div class="contact-links">
+      <a href="mailto:aeshabhatt48@gmail.com">aeshabhatt48@gmail.com</a>
+      <a href="tel:+918000015890">+91 8000015890</a>
+      <a href="https://linkedin.com/in/aesha-bhatt" target="_blank" rel="noopener">linkedin.com/in/aesha-bhatt</a>
+      <a href="https://github.com/aeshabhatt04" target="_blank" rel="noopener">github.com/aeshabhatt04</a>
+    </div>
+    <div class="foot-note">
+      <span>© 2026 Aesha Bhatt</span>
+      <span>Built with SQL, coffee, and mild spreadsheet trauma.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Typewriter effect for the hero query bar
+  const query = [
+    { t: '-- ', c: 'prompt' },
+    { t: 'SELECT ', c: 'kw' },
+    { t: 'name, role, impact\n', c: '' },
+    { t: 'FROM ', c: 'kw' },
+    { t: 'analysts\n', c: '' },
+    { t: 'WHERE ', c: 'kw' },
+    { t: "name = ", c: '' },
+    { t: "'Aesha Bhatt'", c: 'str' },
+    { t: ';', c: '' },
+  ];
+
+  const bar = document.getElementById('queryBar');
+  const heroResult = document.getElementById('heroResult');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function typeQuery() {
+    if (reduceMotion) {
+      bar.innerHTML = query.map(p => p.c ? `<span class="${p.c}">${p.t}</span>` : p.t).join('');
+      heroResult.classList.add('show');
+      return;
+    }
+    let full = '';
+    query.forEach(p => full += p.t);
+    let i = 0;
+    const speed = 22;
+    function step() {
+      i++;
+      let shown = full.slice(0, i);
+      // re-wrap with color spans by rebuilding progressively
+      let out = '';
+      let idx = 0;
+      for (const part of query) {
+        if (idx >= shown.length) break;
+        const remaining = shown.length - idx;
+        const chunk = part.t.slice(0, remaining);
+        out += part.c ? `<span class="${part.c}">${chunk}</span>` : chunk;
+        idx += part.t.length;
+      }
+      bar.innerHTML = out + '<span class="cursor"></span>';
+      if (i < full.length) {
+        requestAnimationFrame(() => setTimeout(step, speed));
+      } else {
+        setTimeout(() => heroResult.classList.add('show'), 200);
+      }
+    }
+    step();
+  }
+  typeQuery();
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => obs.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('show'));
+  }
+</script>
+
+</body>
+</html>
