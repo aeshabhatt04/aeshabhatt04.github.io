@@ -10,15 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #E7E9E0;
-    --paper-raised: #F1F2EB;
-    --ink: #15191C;
-    --ink-soft: #4A5049;
-    --muted: #6E7469;
-    --line: #CBCFC1;
-    --line-strong: #A9AF9C;
+    --paper: #F3ECDD;
+    --paper-raised: #FBF7EE;
+    --ink: #1C1712;
+    --ink-soft: #524A3D;
+    --muted: #8B7F68;
+    --line: #E1D4B8;
+    --line-strong: #C9B78E;
     --accent: #FFC93C;
     --accent-ink: #4A3A00;
+    --accent2: #E8603C;
+    --accent2-tint: #FBE3DA;
     --deep: #1C4B43;
     --deep-soft: #2A6358;
     --radius: 3px;
@@ -65,7 +67,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(231, 233, 224, 0.88);
+    background: rgba(243, 236, 221, 0.88);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--line);
   }
@@ -83,6 +85,15 @@
     font-weight: 500;
     font-size: 0.95rem;
     letter-spacing: -0.02em;
+    position: relative;
+  }
+  .nav-logo::before {
+    content: "";
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent2);
+    margin-right: 8px;
   }
   .nav-logo span { color: var(--muted); }
   .nav-links {
@@ -149,7 +160,7 @@
   .query-bar .cursor {
     display: inline-block;
     width: 8px; height: 1.1em;
-    background: var(--ink);
+    background: var(--accent2);
     vertical-align: text-bottom;
     animation: blink 1s step-end infinite;
   }
@@ -242,9 +253,10 @@
   .sec-tag {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    color: var(--muted);
-    background: var(--paper-raised);
-    border: 1px solid var(--line);
+    color: var(--accent2);
+    font-weight: 500;
+    background: var(--accent2-tint);
+    border: 1px solid #F0C3B0;
     padding: 3px 8px;
     border-radius: var(--radius);
   }
@@ -274,7 +286,8 @@
   .job-date {
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    color: var(--muted);
+    color: var(--accent2);
+    font-weight: 500;
     padding-top: 3px;
   }
   .job-role { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
@@ -312,6 +325,11 @@
     padding: 3px 8px;
     border-radius: 2px;
   }
+  .tag:nth-child(even) {
+    color: var(--accent2);
+    background: var(--accent2-tint);
+    border: 1px solid #F0C3B0;
+  }
   .proj-link {
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -347,7 +365,7 @@
     font-size: 0.82rem;
     color: var(--deep-soft);
     padding: 14px 18px;
-    background: #ECEEE4;
+    background: #EEE4CE;
     border-right: 1px solid var(--line);
   }
   .schema-val {
@@ -549,8 +567,8 @@
 
     <div class="proj-row placeholder">
       <div>
-        <div class="proj-title">+ Add your next project here</div>
-        <p class="proj-desc">&lt;-- copy a .proj-row block above this one and fill in your details --&gt;</p>
+        <div class="proj-title">+ Canada's Population Analysis</div>
+        <p class="proj-desc">Analyzed a decade of Canadian population data using regression and time series forecasting (R² = 0.9685) to uncover growth trends and inform infrastructure and urban planning recommendations.</p>
       </div>
     </div>
   </section>
